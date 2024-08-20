@@ -164,8 +164,7 @@ fun BodyLogin(
         )
         FilledButtonCustom(
             onClick = {
-                keyboardController?.hide()
-
+                navController.navigate(NameRouter.MAIN.name)
             },
             text = "Login",
         )

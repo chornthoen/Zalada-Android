@@ -2,5 +2,8 @@ package com.thoen.zaladaandroid.router
 
 enum class NameRouter {
     LOGIN,
-    SIGNUP
+    SIGNUP,
+    MAIN,
+    CART,
+    HOME
 }
