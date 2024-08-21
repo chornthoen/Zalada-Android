@@ -90,7 +90,6 @@ fun BodyLogin(
 ) {
     var username by rememberSaveable { mutableStateOf("") }
     var password by rememberSaveable { mutableStateOf("") }
-    val keyboardController = LocalSoftwareKeyboardController.current
 
     Column {
         Box(

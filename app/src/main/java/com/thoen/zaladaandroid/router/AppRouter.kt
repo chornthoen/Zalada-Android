@@ -15,7 +15,7 @@ fun AppRouter() {
     val navController = rememberNavController()
     NavHost(
         navController = navController,
-        startDestination = NameRouter.LOGIN.name,
+        startDestination = NameRouter.MAIN.name,
         builder = {
             composable(NameRouter.LOGIN.name) {
                 LoginScreen(navController)
