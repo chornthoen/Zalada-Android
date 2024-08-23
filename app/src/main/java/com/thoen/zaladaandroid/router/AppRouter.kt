@@ -6,7 +6,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.thoen.zaladaandroid.views.authentications.LoginScreen
 import com.thoen.zaladaandroid.views.authentications.SignUpScreen
-import com.thoen.zaladaandroid.views.cart.CartScreen
+import com.thoen.zaladaandroid.views.cart.screen.CartScreen
 import com.thoen.zaladaandroid.views.home.HomeScreen
 import com.thoen.zaladaandroid.views.main.MainScreen
 
@@ -30,6 +30,9 @@ fun AppRouter() {
                 HomeScreen(navController)
             }
             composable(NameRouter.CART.name) {
+                CartScreen(navController)
+            }
+            composable(NameRouter.DETAIL_PRODUCT.name) {
                 CartScreen(navController)
             }
         }

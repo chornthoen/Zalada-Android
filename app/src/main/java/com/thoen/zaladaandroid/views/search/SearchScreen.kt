@@ -1,15 +1,14 @@
-package com.thoen.zaladaandroid.views.cart
+package com.thoen.zaladaandroid.views.search
 
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.input.pointer.PointerIcon.Companion.Text
 import androidx.navigation.NavController
 
-
 @Composable
-fun CartScreen(
+fun SearchScreen(
     navController: NavController
-) {
-    Text(text = "Cart")
 
+) {
+    Text(text = "Search Screen")
 }

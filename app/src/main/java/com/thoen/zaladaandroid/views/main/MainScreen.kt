@@ -36,22 +36,24 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.thoen.zaladaandroid.R
 import com.thoen.zaladaandroid.data.NavItem
-import com.thoen.zaladaandroid.views.cart.CartScreen
+import com.thoen.zaladaandroid.router.NameRouter
+import com.thoen.zaladaandroid.views.cart.screen.CartScreen
 import com.thoen.zaladaandroid.views.favorite.FavoriteScreen
 import com.thoen.zaladaandroid.views.home.HomeScreen
 import com.thoen.zaladaandroid.views.notification.NotificationScreen
 import com.thoen.zaladaandroid.views.profile.ProfileScreen
+import com.thoen.zaladaandroid.views.search.SearchScreen
 
 @Composable
 fun MainScreen(
     navController: NavController
 ) {
     val items = listOf(
-        NavItem("Home", R.drawable.home_light, R.drawable.home_bulk),
-        NavItem("Favorite", R.drawable.heart_light, R.drawable.heart_bulk),
-        NavItem("Cart", R.drawable.bag_light, R.drawable.bag_bulk),
-        NavItem("Notification", R.drawable.notification_light, R.drawable.notification_bulk),
-        NavItem("Profile", R.drawable.profile_light, R.drawable.profile_bulk),
+        NavItem("Home", R.drawable.home_bulk, R.drawable.home_bold),
+        NavItem("Search", R.drawable.search_bulk, R.drawable.search_bold),
+        NavItem("Favorite", R.drawable.heart_bulk, R.drawable.heart_bold),
+        NavItem("Notification", R.drawable.notification_bulk, R.drawable.notification_bold),
+        NavItem("Profile", R.drawable.profile_bulk, R.drawable.profile_bold),
 
 
         )
@@ -118,14 +120,13 @@ fun ItemBottomBar(
                 painter = painterResource(id = if (isSelected) item.iconSelected else item.icon),
                 contentDescription = item.title,
                 alignment = Alignment.Center,
-                colorFilter = ColorFilter.tint(if (isSelected) Color.Black else Color.Gray),
+                colorFilter = ColorFilter.tint(if (isSelected) Color(0xFF2D3C52) else Color.Gray),
                 modifier = Modifier.size(26.dp)
             )
-            Spacer(modifier = Modifier.size(4.dp))
             Text(
                 text = item.title,
                 fontSize = 12.sp,
-                color = if (isSelected) Color.Black else Color.Gray,
+                color = if (isSelected) Color(0xFF2D3C52) else Color.Gray,
                 fontWeight = if (isSelected) FontWeight.W500 else FontWeight.Normal
             )
         }
@@ -140,8 +141,8 @@ fun ContentScreen(
 ) {
     when (selectedIndex) {
         0 -> HomeScreen(navController)
-        1 -> FavoriteScreen(navController)
-        2 -> CartScreen(navController)
+        1 -> SearchScreen(navController)
+        2 -> FavoriteScreen(navController)
         3 -> NotificationScreen(navController)
         4 -> ProfileScreen(navController)
     }

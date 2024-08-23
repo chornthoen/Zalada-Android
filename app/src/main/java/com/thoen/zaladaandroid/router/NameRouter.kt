@@ -5,5 +5,6 @@ enum class NameRouter {
     SIGNUP,
     MAIN,
     CART,
-    HOME
+    HOME,
+    DETAIL_PRODUCT
 }

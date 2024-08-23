@@ -1,8 +1,6 @@
 package com.thoen.zaladaandroid.views.home
 
 
-import androidx.compose.animation.core.snap
-import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -54,6 +52,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.thoen.zaladaandroid.R
 import com.thoen.zaladaandroid.data.Categories
+import com.thoen.zaladaandroid.router.NameRouter
 import kotlinx.coroutines.delay
 
 @Composable
@@ -137,13 +136,18 @@ fun HomeScreen(
                             }
                             Spacer(modifier = Modifier.weight(1f))
                             ShapeIcon(
-                                onClick = {},
-                                icon = R.drawable.notification_light
+                                onClick = {
+                                    navController.navigate(NameRouter.CART.name)
+                                },
+                                icon = R.drawable.buy
                             )
                             Spacer(modifier = Modifier.size(12.dp))
-                            ShapeIcon(
-                                onClick = {},
-                                icon = R.drawable.search_light
+                            Image(
+                                painter = painterResource(id = R.drawable.profile),
+                                contentDescription = "Profile",
+                                modifier = Modifier
+                                    .size(50.dp)
+                                    .clip(RoundedCornerShape(100))
                             )
                         }
                         Text(
@@ -208,11 +212,15 @@ fun HomeScreen(
                         .padding(horizontal = 16.dp),
                 ) {
                     for (i in 1..5) {
-                        ListProducts()
+                        ListProducts(
+                            end = true,
+                            onClick = {
+                                //tap to c
+                            }
+                        )
                     }
                 }
                 Spacer(modifier = Modifier.size(100.dp))
-                Text(text = "Hello")
             }
         }
     }
@@ -240,15 +248,20 @@ fun AutoScrollingLazyRow() {
         }
     }
 }
+
 @Composable
-fun ListProducts() {
+fun ListProducts(
+    end: Boolean = false,
+    onClick: () -> Unit = {},
+) {
 
     Box(
         modifier = Modifier
-            .padding(end = 12.dp)
+            .padding(end = if (end) 12.dp else 0.dp)
             .width(186.dp)
             .height(255.dp)
             .clip(RoundedCornerShape(16.dp))
+
             .background(Color.Transparent)
 
     ) {
@@ -256,8 +269,10 @@ fun ListProducts() {
             modifier = Modifier
                 .width(186.dp)
                 .height(245.dp)
-
                 .clip(RoundedCornerShape(16.dp))
+                .clickable(
+                    onClick = onClick
+                )
                 .background(Color.White)
                 .padding(horizontal = 12.dp, vertical = 12.dp),
             contentAlignment = Alignment.Center
@@ -396,7 +411,13 @@ fun LabelAndAction(
             fontWeight = FontWeight.W500,
             color = Color(0xFF1B5EC9),
             modifier = Modifier
-                .clickable(onClick = onClick)
+                .clip(RoundedCornerShape(8.dp))
+                .clickable(
+                    onClick = onClick,
+
+                )
+                .clip(RoundedCornerShape(8.dp))
+                .padding(4.dp)
         )
     }
 }
