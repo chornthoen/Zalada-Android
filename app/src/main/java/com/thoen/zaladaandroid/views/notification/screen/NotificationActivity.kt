@@ -1,5 +1,4 @@
-package com.thoen.zaladaandroid.views.home
-
+package com.thoen.zaladaandroid.views.notification.screen
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -10,8 +9,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
@@ -26,13 +24,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.thoen.zaladaandroid.R
-import com.thoen.zaladaandroid.views.favorite.ShapeIcons
-
+import com.thoen.zaladaandroid.views.notification.functions.ListNotification
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DetailsProductScreen(
+fun NotificationScreen(
     navController: NavController
 ) {
 
@@ -41,21 +37,21 @@ fun DetailsProductScreen(
             TopAppBar(
                 title = {
                     Text(
-                        text = "My Cart",
+                        text = "Notification",
                         color = Color.Black,
                         fontWeight = FontWeight.W600,
-                        fontSize = 20.sp
+                        fontSize = 22.sp
                     )
                 },
-                actions = {
-                    ShapeIcons(
-                        onClick = {},
-                        icon = R.drawable.search_light
-                    )
-                    Spacer(modifier = Modifier.size(12.dp))
-                }
             )
 
+        },
+        bottomBar = {
+            BottomAppBar(
+                actions = {
+
+                }
+            )
         },
     ) { innerPadding ->
         Box(
@@ -67,12 +63,17 @@ fun DetailsProductScreen(
             Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .fillMaxWidth()
-                    .fillMaxHeight()
-                    .padding(16.dp)
-                    .verticalScroll(rememberScrollState())
             ) {
-                Text(text = "Cart")
+                LazyColumn(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .fillMaxHeight()
+                ) {
+                    items(10) {
+                        ListNotification()
+                        Spacer(modifier = Modifier.size(8.dp))
+                    }
+                }
 
             }
         }
@@ -82,6 +83,6 @@ fun DetailsProductScreen(
 
 @Preview
 @Composable
-fun CartScreenPreview() {
-    DetailsProductScreen(navController = rememberNavController())
+fun PreviewNotificationScreen() {
+    NotificationScreen(navController = rememberNavController())
 }

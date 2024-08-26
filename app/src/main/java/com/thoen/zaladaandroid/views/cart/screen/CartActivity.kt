@@ -54,7 +54,9 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.thoen.zaladaandroid.R
+import com.thoen.zaladaandroid.component.AlertDialogCustom
 import com.thoen.zaladaandroid.data.ItemCartModel
+import com.thoen.zaladaandroid.router.NameRouter
 import com.thoen.zaladaandroid.views.cart.functions.ItemInCart
 import com.thoen.zaladaandroid.views.favorite.ShapeIcons
 import com.thoen.zaladaandroid.views.home.ListProducts
@@ -78,20 +80,20 @@ fun CartScreen(
                 ),
                 ItemCartModel(
                     id = 2,
-                    name = "Macbook Pro 2021 16 inch M1 Pro",
-                    originalPrice = 1000.00,
-                    discountPrice = 800.00,
+                    name = "New True Wireless Stereo Earbuds",
+                    originalPrice = 500.00,
+                    discountPrice = 450.00,
                     quantity = 1,
-                    image = R.drawable.mac,
+                    image = R.drawable.mage1,
                     isChecked = true
                 ),
                 ItemCartModel(
                     id = 2,
-                    name = "Macbook Pro 2021 16 inch M1 Pro",
-                    originalPrice = 1500.00,
-                    discountPrice = 1200.00,
+                    name = "Sound White Wireless Portable",
+                    originalPrice = 250.00,
+                    discountPrice = 240.00,
                     quantity = 1,
-                    image = R.drawable.mac,
+                    image = R.drawable.mask,
                     isChecked = true
                 ),
             )
@@ -99,6 +101,7 @@ fun CartScreen(
     }
 
     var total by remember { mutableDoubleStateOf(0.0) }
+    var showDialog by remember { mutableStateOf(false) }
 
     fun calculateTotal() {
         total = listCart.filter { it.isChecked }.sumOf { it.discountPrice * it.quantity }
@@ -256,9 +259,7 @@ fun CartScreen(
                             }
                         },
                         onDeleted = {
-                            listCart = listCart.filterIndexed { i, _ ->
-                                i != index
-                            }
+                            showDialog = true
                         },
                         onPlus = {
                             listCart = listCart.mapIndexed { i, it ->
@@ -272,6 +273,7 @@ fun CartScreen(
                             }
                         },
 
+
                         onMinus = {
                             listCart = listCart.mapIndexed { i, it ->
                                 if (i == index && it.quantity > 1) {
@@ -284,6 +286,20 @@ fun CartScreen(
                             }
                         }
                     )
+                    if (showDialog) {
+                        AlertDialogCustom(
+                            onDismissRequest = {
+                                showDialog = false
+                            },
+                            onConfirmation = {
+                                showDialog = false
+                                listCart = listCart.filterIndexed { i, _ -> i != index }
+                                calculateTotal()
+                            },
+                            dialogTitle = "Delete Product",
+                            dialogText = "Are you sure you want to delete this product?",
+                        )
+                    }
                 }
                 Spacer(modifier = Modifier.size(16.dp))
                 Text(
@@ -302,7 +318,6 @@ fun CartScreen(
                         ListProducts(
                             end = true,
                             onClick = {
-                                //tap to c
                             }
                         )
                     }

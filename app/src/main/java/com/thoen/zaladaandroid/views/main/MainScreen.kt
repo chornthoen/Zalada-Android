@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.imePadding
@@ -36,12 +35,10 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.thoen.zaladaandroid.R
 import com.thoen.zaladaandroid.data.NavItem
-import com.thoen.zaladaandroid.router.NameRouter
-import com.thoen.zaladaandroid.views.cart.screen.CartScreen
 import com.thoen.zaladaandroid.views.favorite.FavoriteScreen
 import com.thoen.zaladaandroid.views.home.HomeScreen
-import com.thoen.zaladaandroid.views.notification.NotificationScreen
-import com.thoen.zaladaandroid.views.profile.ProfileScreen
+import com.thoen.zaladaandroid.views.notification.screen.NotificationScreen
+import com.thoen.zaladaandroid.views.profile.screen.ProfileScreen
 import com.thoen.zaladaandroid.views.search.SearchScreen
 
 @Composable
@@ -127,7 +124,7 @@ fun ItemBottomBar(
                 text = item.title,
                 fontSize = 12.sp,
                 color = if (isSelected) Color(0xFF2D3C52) else Color.Gray,
-                fontWeight = if (isSelected) FontWeight.W500 else FontWeight.Normal
+                fontWeight = if (isSelected) FontWeight.W600 else FontWeight.Normal
             )
         }
     }

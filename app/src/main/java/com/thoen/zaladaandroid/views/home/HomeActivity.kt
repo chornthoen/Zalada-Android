@@ -139,11 +139,12 @@ fun HomeScreen(
                                 onClick = {
                                     navController.navigate(NameRouter.CART.name)
                                 },
-                                icon = R.drawable.buy
+                                icon = R.drawable.buy,
+                                count = 3
                             )
                             Spacer(modifier = Modifier.size(12.dp))
                             Image(
-                                painter = painterResource(id = R.drawable.profile),
+                                painter = painterResource(id = R.drawable.thoen),
                                 contentDescription = "Profile",
                                 modifier = Modifier
                                     .size(50.dp)
@@ -215,7 +216,7 @@ fun HomeScreen(
                         ListProducts(
                             end = true,
                             onClick = {
-                                //tap to c
+                                navController.navigate(NameRouter.DETAIL_PRODUCT.name)
                             }
                         )
                     }
@@ -415,7 +416,7 @@ fun LabelAndAction(
                 .clickable(
                     onClick = onClick,
 
-                )
+                    )
                 .clip(RoundedCornerShape(8.dp))
                 .padding(4.dp)
         )
@@ -606,27 +607,50 @@ fun Banner() {
 @Composable
 fun ShapeIcon(
     onClick: () -> Unit,
-    icon: Int
+    icon: Int,
+    count : Int = 0
 ) {
-    Box(
-        modifier = Modifier
-            .size(50.dp)
-            .clip(RoundedCornerShape(100))
-            .background(Color.White.copy(alpha = 0.2f))
-            .clickable(
-                onClick = onClick
-            ),
-        contentAlignment = Alignment.Center
-    ) {
-        Image(
-            painter = painterResource(id = icon),
-            contentDescription = "Icon",
+    Box (
+        contentAlignment = Alignment.TopEnd
+    ){
+        Box(
             modifier = Modifier
-                .height(280.dp),
-            colorFilter = ColorFilter.tint(Color.White),
+                .size(50.dp)
+                .clip(RoundedCornerShape(100))
+                .background(Color.White.copy(alpha = 0.2f))
+                .clickable(
+                    onClick = onClick
+                ),
+            contentAlignment = Alignment.Center
+        ) {
+            Image(
+                painter = painterResource(id = icon),
+                contentDescription = "Icon",
+                modifier = Modifier
+                    .height(280.dp),
+                colorFilter = ColorFilter.tint(Color.White),
 
-            alignment = Alignment.CenterEnd
-        )
+                alignment = Alignment.CenterEnd
+            )
+        }
+        if (count > 0) {
+            Box(
+                modifier = Modifier
+                    .size(20.dp)
+                    .clip(RoundedCornerShape(100))
+                    .background(Color(0xFFFF5944)),
+                contentAlignment = Alignment.Center
+
+            ) {
+                Text(
+                    text = "3",
+                    color = Color.White,
+                    fontSize = 12.sp,
+                    lineHeight = 16.sp,
+                    fontWeight = FontWeight.W600
+                )
+            }
+        }
     }
 }
 
