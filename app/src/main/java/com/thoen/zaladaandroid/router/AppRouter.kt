@@ -10,31 +10,35 @@ import com.thoen.zaladaandroid.views.cart.screen.CartScreen
 import com.thoen.zaladaandroid.views.home.DetailsProductScreen
 import com.thoen.zaladaandroid.views.home.HomeScreen
 import com.thoen.zaladaandroid.views.main.MainScreen
+import com.thoen.zaladaandroid.views.search.screen.SearchScreen
 
 @Composable
 fun AppRouter() {
     val navController = rememberNavController()
     NavHost(
         navController = navController,
-        startDestination = NameRouter.MAIN.name,
+        startDestination = Main.route,
         builder = {
-            composable(NameRouter.LOGIN.name) {
+            composable(Login.route) {
                 LoginScreen(navController)
             }
-            composable(NameRouter.SIGNUP.name) {
+            composable(Signup.route) {
                 SignUpScreen(navController)
             }
-            composable(NameRouter.MAIN.name) {
+            composable(Main.route) {
                 MainScreen(navController)
             }
-            composable(NameRouter.HOME.name) {
+            composable(Home.route) {
                 HomeScreen(navController)
             }
-            composable(NameRouter.CART.name) {
+            composable(Cart.route) {
                 CartScreen(navController)
             }
-            composable(NameRouter.DETAIL_PRODUCT.name) {
+            composable(DetailProduct.route) {
                 DetailsProductScreen(navController)
+            }
+            composable(Search.route) {
+                SearchScreen(navController)
             }
         }
     )

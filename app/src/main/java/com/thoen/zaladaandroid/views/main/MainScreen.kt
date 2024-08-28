@@ -39,7 +39,6 @@ import com.thoen.zaladaandroid.views.favorite.FavoriteScreen
 import com.thoen.zaladaandroid.views.home.HomeScreen
 import com.thoen.zaladaandroid.views.notification.screen.NotificationScreen
 import com.thoen.zaladaandroid.views.profile.screen.ProfileScreen
-import com.thoen.zaladaandroid.views.search.SearchScreen
 
 @Composable
 fun MainScreen(
@@ -47,7 +46,6 @@ fun MainScreen(
 ) {
     val items = listOf(
         NavItem("Home", R.drawable.home_bulk, R.drawable.home_bold),
-        NavItem("Search", R.drawable.search_bulk, R.drawable.search_bold),
         NavItem("Favorite", R.drawable.heart_bulk, R.drawable.heart_bold),
         NavItem("Notification", R.drawable.notification_bulk, R.drawable.notification_bold),
         NavItem("Profile", R.drawable.profile_bulk, R.drawable.profile_bold),
@@ -138,10 +136,9 @@ fun ContentScreen(
 ) {
     when (selectedIndex) {
         0 -> HomeScreen(navController)
-        1 -> SearchScreen(navController)
-        2 -> FavoriteScreen(navController)
-        3 -> NotificationScreen(navController)
-        4 -> ProfileScreen(navController)
+        1 -> FavoriteScreen(navController)
+        2 -> NotificationScreen(navController)
+        3 -> ProfileScreen(navController)
     }
 }
 

@@ -28,6 +28,7 @@ import com.thoen.zaladaandroid.R
 
 @Composable
 fun CustomTextField(
+    modifier: Modifier = Modifier,
     keyboardType: KeyboardType = KeyboardType.Text,
     label: String = "",
     value: String = "",

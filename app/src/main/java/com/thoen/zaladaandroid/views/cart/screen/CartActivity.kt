@@ -55,6 +55,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.thoen.zaladaandroid.R
 import com.thoen.zaladaandroid.component.AlertDialogCustom
+import com.thoen.zaladaandroid.component.ButtonBack
 import com.thoen.zaladaandroid.data.ItemCartModel
 import com.thoen.zaladaandroid.router.NameRouter
 import com.thoen.zaladaandroid.views.cart.functions.ItemInCart
@@ -120,30 +121,18 @@ fun CartScreen(
                     )
                 },
                 navigationIcon = {
-                    Box(
+                    Box (
                         modifier = Modifier
-                            .padding(horizontal = 16.dp)
-                            .clip(RoundedCornerShape(100))
-                            .background(Color.White.copy(alpha = 0.1f))
-                            .border(
-                                width = 1.dp,
-                                color = Color.Gray.copy(alpha = 0.1f),
-                                shape = RoundedCornerShape(100)
-                            )
-                            .clickable(
-                                onClick = {
-                                    navController.popBackStack()
-                                }
-                            )
-                            .padding(8.dp),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Icon(
-                            painter = painterResource(id = R.drawable.arrow_left),
-                            contentDescription = "Minus",
-                            tint = Color(0xFF2D3C52),
+                            .padding(horizontal = 16.dp, vertical = 8.dp)
+
+                    ){
+                        ButtonBack(
+                            onClick = {
+                                navController.popBackStack()
+                            }
                         )
                     }
+
                 },
             )
 
@@ -327,6 +316,7 @@ fun CartScreen(
         }
     }
 }
+
 
 @Preview
 @Composable

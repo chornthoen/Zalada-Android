@@ -1,6 +1,7 @@
 package com.thoen.zaladaandroid.views.home
 
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -18,8 +19,11 @@ import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -143,12 +147,12 @@ fun HomeScreen(
                                 count = 3
                             )
                             Spacer(modifier = Modifier.size(12.dp))
-                            Image(
-                                painter = painterResource(id = R.drawable.thoen),
-                                contentDescription = "Profile",
-                                modifier = Modifier
-                                    .size(50.dp)
-                                    .clip(RoundedCornerShape(100))
+                            ShapeIcon(
+                                onClick = {
+                                    navController.navigate(NameRouter.SEARCH.name)
+
+                                },
+                                icon = R.drawable.search_bold,
                             )
                         }
                         Text(
@@ -228,25 +232,32 @@ fun HomeScreen(
 }
 
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun AutoScrollingLazyRow() {
-    val listState = rememberLazyListState()
+fun AutoScrollingLazyRow(
+    modifier: Modifier = Modifier
+) {
+    var pageState = rememberPagerState (pageCount = { 5 })
 
-    LaunchedEffect(Unit) {
-        while (true) {
-            delay(2000) // Delay of 2 seconds
-            val nextIndex = (listState.firstVisibleItemIndex + 1) % 5
-            listState.animateScrollToItem(nextIndex)
-        }
-    }
-
-    LazyRow(
-        state = listState,
-        horizontalArrangement = Arrangement.spacedBy(16.dp)
+    Box(
+        modifier = modifier
+            .wrapContentSize()
     ) {
-        items(5) {
-            Banner()
+        HorizontalPager(
+            state = pageState,
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(200.dp)
+        ) {
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(200.dp)
+            ) {
+                Banner()
+            }
         }
+
     }
 }
 
