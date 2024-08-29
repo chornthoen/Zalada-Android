@@ -14,13 +14,10 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -32,9 +29,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -43,8 +38,8 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.thoen.zaladaandroid.R
 import com.thoen.zaladaandroid.component.AlertDialogCustom
-import com.thoen.zaladaandroid.router.NameRouter
-import com.thoen.zaladaandroid.views.favorite.ShapeIcons
+import com.thoen.zaladaandroid.router.Login
+import com.thoen.zaladaandroid.views.favorite.screen.ShapeIcons
 import com.thoen.zaladaandroid.views.profile.functions.ItemProfile
 import com.thoen.zaladaandroid.views.profile.functions.SwitcherNotification
 
@@ -234,7 +229,7 @@ fun ProfileScreen(
                         },
                         onConfirmation = {
                             showLogoutDialog = false
-                            navController.navigate(NameRouter.LOGIN.name)
+                            navController.navigate(Login.route)
                         },
                         dialogTitle = "Logout",
                         dialogText = "Are you sure you want to logout?",

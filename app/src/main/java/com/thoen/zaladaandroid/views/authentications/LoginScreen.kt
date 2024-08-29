@@ -42,7 +42,8 @@ import com.thoen.zaladaandroid.R
 import com.thoen.zaladaandroid.component.CardSocialMedia
 import com.thoen.zaladaandroid.component.CustomTextField
 import com.thoen.zaladaandroid.component.FilledButtonCustom
-import com.thoen.zaladaandroid.router.NameRouter
+import com.thoen.zaladaandroid.router.Main
+import com.thoen.zaladaandroid.router.Signup
 import com.thoen.zaladaandroid.ui.theme.ZaladaAndroidTheme
 
 @SuppressLint("UnrememberedMutableInteractionSource")
@@ -163,7 +164,7 @@ fun BodyLogin(
         )
         FilledButtonCustom(
             onClick = {
-                navController.navigate(NameRouter.MAIN.name)
+                navController.navigate(Main.route)
             },
             text = "Login",
         )
@@ -233,7 +234,7 @@ fun BodyLogin(
             )
             TextButton(
                 onClick = {
-                    navController.navigate(NameRouter.SIGNUP.name)
+                    navController.navigate(Signup.route)
                 },
                 shape = RoundedCornerShape(8.dp),
 

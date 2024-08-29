@@ -20,8 +20,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
-import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.rememberScrollState
@@ -35,7 +33,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -56,8 +53,9 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.thoen.zaladaandroid.R
 import com.thoen.zaladaandroid.data.Categories
-import com.thoen.zaladaandroid.router.NameRouter
-import kotlinx.coroutines.delay
+import com.thoen.zaladaandroid.router.Cart
+import com.thoen.zaladaandroid.router.DetailProduct
+import com.thoen.zaladaandroid.router.Search
 
 @Composable
 fun HomeScreen(
@@ -141,7 +139,7 @@ fun HomeScreen(
                             Spacer(modifier = Modifier.weight(1f))
                             ShapeIcon(
                                 onClick = {
-                                    navController.navigate(NameRouter.CART.name)
+                                    navController.navigate(Cart.route)
                                 },
                                 icon = R.drawable.buy,
                                 count = 3
@@ -149,7 +147,7 @@ fun HomeScreen(
                             Spacer(modifier = Modifier.size(12.dp))
                             ShapeIcon(
                                 onClick = {
-                                    navController.navigate(NameRouter.SEARCH.name)
+                                    navController.navigate(Search.route)
 
                                 },
                                 icon = R.drawable.search_bold,
@@ -220,7 +218,7 @@ fun HomeScreen(
                         ListProducts(
                             end = true,
                             onClick = {
-                                navController.navigate(NameRouter.DETAIL_PRODUCT.name)
+                                navController.navigate(DetailProduct.route)
                             }
                         )
                     }

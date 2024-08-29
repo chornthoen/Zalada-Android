@@ -35,7 +35,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.thoen.zaladaandroid.R
 import com.thoen.zaladaandroid.data.NavItem
-import com.thoen.zaladaandroid.views.favorite.FavoriteScreen
+import com.thoen.zaladaandroid.views.favorite.screen.FavoriteScreen
 import com.thoen.zaladaandroid.views.home.HomeScreen
 import com.thoen.zaladaandroid.views.notification.screen.NotificationScreen
 import com.thoen.zaladaandroid.views.profile.screen.ProfileScreen

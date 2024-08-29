@@ -47,7 +47,7 @@ import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImage
 import com.thoen.zaladaandroid.R
 import com.thoen.zaladaandroid.component.ButtonBack
-import com.thoen.zaladaandroid.views.favorite.ShapeIcons
+import com.thoen.zaladaandroid.views.favorite.screen.ShapeIcons
 
 
 @OptIn(ExperimentalMaterial3Api::class)
