@@ -200,7 +200,11 @@ fun HomeScreen(
                         .padding(horizontal = 16.dp),
                 ) {
                     for (i in 1..5) {
-                        GirdItem()
+                        GirdItem(
+                            onClick = {
+                                navController.navigate(DetailProduct.route)
+                            }
+                        )
                     }
                 }
                 Spacer(modifier = Modifier.size(12.dp))
@@ -433,7 +437,9 @@ fun LabelAndAction(
 }
 
 @Composable
-fun GirdItem() {
+fun GirdItem(
+    onClick: () -> Unit = {}
+) {
 
     Box(
         modifier = Modifier
@@ -450,6 +456,9 @@ fun GirdItem() {
                 .height(245.dp)
 
                 .clip(RoundedCornerShape(16.dp))
+                .clickable(
+                    onClick = onClick
+                )
                 .background(Color.White)
                 .padding(horizontal = 12.dp, vertical = 12.dp),
             contentAlignment = Alignment.Center

@@ -25,8 +25,11 @@ import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -35,6 +38,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -47,6 +51,7 @@ import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImage
 import com.thoen.zaladaandroid.R
 import com.thoen.zaladaandroid.component.ButtonBack
+import com.thoen.zaladaandroid.router.DetailProduct
 import com.thoen.zaladaandroid.views.favorite.screen.ShapeIcons
 
 
@@ -58,8 +63,8 @@ fun DetailsProductScreen(
 
     var listColors = listOf(
         Color(0xFF2D3C52),
-        Color(0xFFEA4AEA),
-        Color(0xFF2D5C52),
+        Color(0xFFA6A5AA),
+        Color(0xFFF2E0CC),
     )
     Scaffold(
         topBar = {
@@ -101,6 +106,84 @@ fun DetailsProductScreen(
             )
 
         },
+        bottomBar = {
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(80.dp)
+                    .background(Color.White)
+            ) {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(start = 20.dp, end = 20.dp, top = 8.dp, bottom = 24.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Box (
+                        contentAlignment = Alignment.TopEnd
+                    ){
+                        Box(
+                            modifier = Modifier
+                                .clip(RoundedCornerShape(100))
+                                .background(Color.White.copy(alpha = 0.1f))
+                                .border(
+                                    width = 1.dp,
+                                    color = Color.Gray.copy(alpha = 0.1f),
+                                    shape = RoundedCornerShape(100)
+                                )
+                                .clickable(
+                                    onClick = {}
+                                )
+                                .padding(10.dp),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Icon(
+                                painter = painterResource(id = R.drawable.buy),
+                                contentDescription = "Add to cart",
+                                tint = Color(0xFF2D3C52),
+                                modifier = Modifier.size(30.dp)
+                            )
+                        }
+                        Box(
+                            modifier = Modifier
+                                .size(20.dp)
+                                .clip(RoundedCornerShape(100))
+                                .background(Color(0xFFE8E8EA)),
+                            contentAlignment = Alignment.Center
+
+                        ) {
+                            Image(
+                                painter = painterResource(id = R.drawable.add_),
+                                contentDescription = "Icon",
+                                colorFilter = ColorFilter.tint(Color.Black),
+
+                                alignment = Alignment.CenterEnd
+                            )
+                        }
+                    }
+                    Spacer(modifier = Modifier.size(20.dp))
+                    Button(
+                        onClick = {},
+                        modifier = Modifier
+                            .height(48.dp)
+                            .fillMaxWidth(),
+                        shape = RoundedCornerShape(30.dp),
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = Color(0xFF2D3C52),
+                        )
+                    ) {
+                        Text(
+                            text = "Checkout",
+                            color = Color.White,
+                            fontWeight = FontWeight.W600,
+                            fontSize = 16.sp
+                        )
+                        
+                    }
+                }
+            }
+        }
     ) { innerPadding ->
         Box(
             modifier = Modifier
@@ -165,19 +248,21 @@ fun DetailsProductScreen(
                 }
                 SliderProduct()
                 Spacer(modifier = Modifier.size(16.dp))
-                HorizontalDivider()
                 Text(
                     text = "Color",
                     fontSize = 16.sp,
                     color = Color.Black,
-                    fontWeight = FontWeight.W400,
+                    fontWeight = FontWeight.W500,
+                    modifier = Modifier.padding(horizontal = 16.dp)
                 )
-                Spacer(modifier = Modifier.size(16.dp))
-                LazyRow {
+                Spacer(modifier = Modifier.size(8.dp))
+                LazyRow(
+                    modifier = Modifier.padding(horizontal = 16.dp)
+                ) {
                     items(listColors.size) {
                         Box(
                             modifier = Modifier
-                                .padding(2.dp)
+                                .padding(4.dp)
                                 .size(40.dp)
                                 .clip(RoundedCornerShape(100))
                                 .background(listColors[it])
@@ -198,24 +283,48 @@ fun DetailsProductScreen(
 
                     }
                 }
-
-
+                Spacer(modifier = Modifier.size(16.dp))
+                Text(
+                    text = "Description",
+                    fontSize = 16.sp,
+                    color = Color.Black,
+                    fontWeight = FontWeight.W500,
+                    modifier = Modifier.padding(horizontal = 16.dp)
+                )
+                Spacer(modifier = Modifier.size(8.dp))
+                Text(
+                    text = "The MacBook Pro is a line of Macintosh portable computers introduced in January 2006, by Apple Inc. It is the higher-end model of the MacBook family,",
+                    fontSize = 14.sp,
+                    color = Color(0xFF7C7D82),
+                    fontWeight = FontWeight.W400,
+                    modifier = Modifier.padding(horizontal = 16.dp)
+                )
+                Spacer(modifier = Modifier.size(16.dp))
+                Text(
+                    text = "Recommend for you",
+                    fontSize = 16.sp,
+                    color = Color.Black,
+                    fontWeight = FontWeight.W500,
+                    modifier = Modifier.padding(horizontal = 16.dp)
+                )
+                Spacer(modifier = Modifier.size(8.dp))
+                LazyRow {
+                    items(5) {
+                        ListProducts(
+                            end = true,
+                            onClick = {
+                                navController.navigate(DetailProduct.route)
+                            }
+                        )
+                    }
+                }
+                Spacer(modifier = Modifier.size(16.dp))
             }
         }
     }
 
 }
-@Composable
-fun NetworkImage() {
-    AsyncImage(
-        model = "https://resource.logitech.com/w_692,c_lpad,ar_4:3,q_auto,f_auto,dpr_2.0/d_transparent.gif/content/dam/logitech/en/products/mice/mx-master-3s/gallery/mx-master-3s-mouse-side-view-graphite.png?v=1",
-        contentDescription = "Description of the image",
-        modifier = Modifier
-            .size(400.dp)
-            .fillMaxWidth()
-            .padding(horizontal = 16.dp)
-    )
-}
+
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
