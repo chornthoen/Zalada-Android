@@ -31,3 +31,23 @@ object DetailProduct : Destinations {
 object Search : Destinations {
     override val route = "Search"
 }
+
+object Favorite : Destinations {
+    override val route = "Favorite"
+}
+
+object ProductAll : Destinations {
+    override val route = "ProductAll"
+}
+
+object ForgetPassword : Destinations {
+    override val route = "ForgetPassword"
+}
+
+object OTP : Destinations {
+    override val route = "OTP"
+}
+
+object CreatePassword : Destinations {
+    override val route = "CreatePassword"
+}

@@ -42,6 +42,7 @@ import com.thoen.zaladaandroid.R
 import com.thoen.zaladaandroid.component.CardSocialMedia
 import com.thoen.zaladaandroid.component.CustomTextField
 import com.thoen.zaladaandroid.component.FilledButtonCustom
+import com.thoen.zaladaandroid.router.ForgetPassword
 import com.thoen.zaladaandroid.router.Main
 import com.thoen.zaladaandroid.router.Signup
 import com.thoen.zaladaandroid.ui.theme.ZaladaAndroidTheme
@@ -75,7 +76,6 @@ fun LoginScreen(
                     .fillMaxWidth()
                     .fillMaxHeight()
                     .verticalScroll(rememberScrollState())
-                    .background(Color(0xFFFFFFFF))
                     .padding(horizontal = 8.dp)
 
             ) {
@@ -144,7 +144,9 @@ fun BodyLogin(
                     .weight(1f)
             )
             TextButton(
-                onClick = {},
+                onClick = {
+                    navController.navigate(ForgetPassword.route)
+                },
                 modifier = Modifier
                     .padding(horizontal = 1.dp),
                 shape = RoundedCornerShape(8.dp),

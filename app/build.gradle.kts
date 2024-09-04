@@ -66,7 +66,9 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
-    implementation("io.coil-kt:coil-compose:2.4.0")
+    implementation(libs.coil.compose)
+    implementation("com.github.osamasayed585:Verify-Swift:1.1.1")
+
 
 
     implementation(libs.androidx.navigation.compose)

@@ -1,7 +1,7 @@
 package com.thoen.zaladaandroid.views.authentications
 
-
 import android.annotation.SuppressLint
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -9,19 +9,23 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -31,6 +35,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextDecoration
@@ -40,19 +45,54 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.thoen.zaladaandroid.R
+import com.thoen.zaladaandroid.component.ButtonBack
 import com.thoen.zaladaandroid.component.CardSocialMedia
 import com.thoen.zaladaandroid.component.CustomTextField
 import com.thoen.zaladaandroid.component.FilledButtonCustom
+import com.thoen.zaladaandroid.router.Main
+import com.thoen.zaladaandroid.router.OTP
+import com.thoen.zaladaandroid.router.Search
+import com.thoen.zaladaandroid.router.Signup
 import com.thoen.zaladaandroid.ui.theme.ZaladaAndroidTheme
+import com.thoen.zaladaandroid.views.favorite.screen.ShapeIcons
 
+@OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnrememberedMutableInteractionSource")
 @Composable
-fun SignUpScreen(
+fun ForgetPasswordScreen(
     navController: NavController,
 ) {
     val keyboardController = LocalSoftwareKeyboardController.current
     Scaffold(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier.fillMaxSize(),
+        topBar = {
+            TopAppBar(
+                title = {
+                    Text(
+                        text = "Forget Password",
+                        color = Color.Black,
+                        fontWeight = FontWeight.W600,
+                        fontSize = 24.sp
+                    )
+                },
+                navigationIcon = {
+                    Box (
+                        modifier = Modifier
+                            .padding(horizontal = 16.dp, vertical = 8.dp)
+
+                    ){
+                        ButtonBack(
+                            onClick = {
+                                navController.popBackStack()
+                            }
+                        )
+                    }
+
+                },
+            )
+
+        },
+
     ) { innerPadding ->
         Box(
             modifier = Modifier
@@ -77,54 +117,51 @@ fun SignUpScreen(
                     .padding(horizontal = 8.dp)
 
             ) {
-                BodySignUp(navController)
+                BodyForgetPassword(navController)
             }
         }
     }
 }
 
 @Composable
-fun BodySignUp(
+fun BodyForgetPassword(
     navController: NavController
 ) {
     var username by rememberSaveable { mutableStateOf("") }
-    var email by rememberSaveable { mutableStateOf("") }
-    var password by rememberSaveable { mutableStateOf("") }
-    val keyboardController = LocalSoftwareKeyboardController.current
 
     Column {
         Box(
             modifier = Modifier
-                .height(20.dp)
-        )
+                .fillMaxWidth()
+                .height(200.dp)
+        ) {
+            Image(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                painter = painterResource(id = R.drawable.forget),
+                contentDescription = null,
+            )
+        }
         Text(
-            text = "Create your new\naccount.",
-            modifier = Modifier.padding(16.dp),
-            fontSize = 36.sp,
-            fontWeight = FontWeight.Bold,
-            lineHeight = 40.sp
-        )
-        Box(
-            modifier = Modifier
-                .height(12.dp)
-        )
-        Text(
-            text = "Full Name",
+            text = "Forget Password",
             modifier = Modifier.padding(horizontal = 16.dp),
-            fontSize = 16.sp,
-            lineHeight = 12.sp
-
-        )
-        CustomTextField(
-            keyboardType = KeyboardType.Text,
-            label = "Full Name",
-            value = username,
-            onTextChanged = { username = it },
-            passwordVisible = true
+            fontSize = 32.sp,
+            fontWeight = FontWeight.W500,
         )
         Box(
             modifier = Modifier
                 .height(12.dp)
+        )
+        Text(
+            text = "Please enter your email address. You will receive a link to create a new password via email.",
+            modifier = Modifier.padding(horizontal = 16.dp),
+            fontSize = 12.sp,
+            color = Color(0xFF828282),
+            lineHeight = 16.sp
+        )
+        Box(
+            modifier = Modifier
+                .height(40.dp)
         )
         Text(
             text = "Email Address",
@@ -136,127 +173,34 @@ fun BodySignUp(
         CustomTextField(
             keyboardType = KeyboardType.Email,
             label = "Email",
-            value = email,
-            onTextChanged = { email = it },
+            value = username,
+            onTextChanged = { username = it },
             passwordVisible = true
         )
         Box(
             modifier = Modifier
-                .height(12.dp)
-        )
-        Text(
-            text = "Password",
-            modifier = Modifier.padding(horizontal = 16.dp),
-            fontSize = 16.sp,
-            lineHeight = 12.sp
-        )
-        CustomTextField(
-            keyboardType = KeyboardType.Password,
-            label = "Password",
-            value = password,
-            onTextChanged = { password = it },
-        )
-        Box(
-            modifier = Modifier
-                .height(16.dp)
+                .height(40.dp)
         )
         FilledButtonCustom(
             onClick = {
-                keyboardController?.hide()
-
+                navController.navigate(OTP.route)
             },
-            text = "Sign Up",
+            text = "Continue",
         )
         Box(
             modifier = Modifier
                 .height(16.dp)
         )
-        Row(
-            horizontalArrangement = Arrangement.Center,
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 16.dp)
-        ) {
-
-            Box(
-                modifier = Modifier
-                    .height(1.dp)
-                    .width(100.dp)
-                    .background(Color(0xFFE0E0E0))
-                    .weight(1f)
-            )
-            Text(
-                text = "OR",
-                fontSize = 16.sp,
-                fontWeight = FontWeight.W400,
-                modifier = Modifier.padding(horizontal = 4.dp)
-            )
-            Box(
-                modifier = Modifier
-                    .height(1.dp)
-                    .width(100.dp)
-                    .background(Color(0xFFE0E0E0))
-                    .weight(1f)
-            )
-        }
-        Box(
-            modifier = Modifier
-                .height(8.dp)
-        )
-        CardSocialMedia(
-            text = "Continue with Google",
-            onClick = {},
-            icon = R.drawable.google
-        )
-        CardSocialMedia(
-            text = "Continue with Facebook",
-            onClick = {},
-            icon = R.drawable.facebook
-        )
-        Box(
-            modifier = Modifier
-                .height(16.dp)
-        )
-
-        Row(
-            horizontalArrangement = Arrangement.Center,
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 16.dp)
-        ) {
-            Text(
-                text = "Already have an account?",
-                fontSize = 16.sp,
-                lineHeight = 12.sp
-            )
-            TextButton(
-                onClick = {
-                    navController.popBackStack()
-                },
-                shape = RoundedCornerShape(8.dp),
-
-                ) {
-                Text(
-                    text = "Log In",
-                    fontSize = 16.sp,
-                    fontWeight = FontWeight.W500,
-                    textDecoration = TextDecoration.Underline
-                )
-            }
-        }
 
 
     }
 }
+
 
 @Preview
 @Composable
-fun GreetingPreview() {
+fun PreviewForgetPasswordScreen() {
     ZaladaAndroidTheme {
-        SignUpScreen(navController = rememberNavController())
+        ForgetPasswordScreen(navController = rememberNavController())
     }
-
 }
-

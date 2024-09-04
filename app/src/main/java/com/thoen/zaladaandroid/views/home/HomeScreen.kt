@@ -55,6 +55,7 @@ import com.thoen.zaladaandroid.R
 import com.thoen.zaladaandroid.data.Categories
 import com.thoen.zaladaandroid.router.Cart
 import com.thoen.zaladaandroid.router.DetailProduct
+import com.thoen.zaladaandroid.router.ProductAll
 import com.thoen.zaladaandroid.router.Search
 
 @Composable
@@ -191,7 +192,9 @@ fun HomeScreen(
                 Spacer(modifier = Modifier.size(12.dp))
                 LabelAndAction(
                     label = "New Arrival",
-                    onClick = {}
+                    onClick = {
+                        navController.navigate(ProductAll.route)
+                    }
                 )
                 Spacer(modifier = Modifier.size(12.dp))
                 Row(
@@ -210,7 +213,9 @@ fun HomeScreen(
                 Spacer(modifier = Modifier.size(12.dp))
                 LabelAndAction(
                     label = "Popular Products",
-                    onClick = {}
+                    onClick = {
+                        navController.navigate(ProductAll.route)
+                    }
                 )
                 Spacer(modifier = Modifier.size(12.dp))
                 Row(

@@ -1,6 +1,5 @@
 package com.thoen.zaladaandroid.views.authentications
 
-
 import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -19,9 +18,11 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -40,19 +41,52 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.thoen.zaladaandroid.R
+import com.thoen.zaladaandroid.component.ButtonBack
 import com.thoen.zaladaandroid.component.CardSocialMedia
 import com.thoen.zaladaandroid.component.CustomTextField
 import com.thoen.zaladaandroid.component.FilledButtonCustom
+import com.thoen.zaladaandroid.router.ForgetPassword
+import com.thoen.zaladaandroid.router.Login
+import com.thoen.zaladaandroid.router.Main
+import com.thoen.zaladaandroid.router.Signup
 import com.thoen.zaladaandroid.ui.theme.ZaladaAndroidTheme
 
+@OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnrememberedMutableInteractionSource")
 @Composable
-fun SignUpScreen(
+fun CreatePasswordScreen(
     navController: NavController,
 ) {
     val keyboardController = LocalSoftwareKeyboardController.current
     Scaffold(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier.fillMaxSize(),
+        topBar = {
+            TopAppBar(
+                title = {
+                    Text(
+                        text = "Create Password",
+                        color = Color.Black,
+                        fontWeight = FontWeight.W600,
+                        fontSize = 24.sp
+                    )
+                },
+                navigationIcon = {
+                    Box (
+                        modifier = Modifier
+                            .padding(horizontal = 16.dp, vertical = 8.dp)
+
+                    ){
+                        ButtonBack(
+                            onClick = {
+                                navController.popBackStack()
+                            }
+                        )
+                    }
+
+                },
+            )
+
+        },
     ) { innerPadding ->
         Box(
             modifier = Modifier
@@ -77,186 +111,88 @@ fun SignUpScreen(
                     .padding(horizontal = 8.dp)
 
             ) {
-                BodySignUp(navController)
+                BodyCreatePassword(navController)
             }
         }
     }
 }
 
 @Composable
-fun BodySignUp(
+fun BodyCreatePassword(
     navController: NavController
 ) {
-    var username by rememberSaveable { mutableStateOf("") }
-    var email by rememberSaveable { mutableStateOf("") }
+    var newPassword by rememberSaveable { mutableStateOf("") }
     var password by rememberSaveable { mutableStateOf("") }
-    val keyboardController = LocalSoftwareKeyboardController.current
 
     Column {
         Box(
             modifier = Modifier
-                .height(20.dp)
+                .height(40.dp)
         )
         Text(
-            text = "Create your new\naccount.",
+            text = "Create Password",
             modifier = Modifier.padding(16.dp),
-            fontSize = 36.sp,
+            fontSize = 28.sp,
             fontWeight = FontWeight.Bold,
             lineHeight = 40.sp
         )
         Box(
             modifier = Modifier
-                .height(12.dp)
+                .height(40.dp)
         )
         Text(
-            text = "Full Name",
+            text = "New Password",
             modifier = Modifier.padding(horizontal = 16.dp),
             fontSize = 16.sp,
             lineHeight = 12.sp
 
         )
         CustomTextField(
-            keyboardType = KeyboardType.Text,
-            label = "Full Name",
-            value = username,
-            onTextChanged = { username = it },
-            passwordVisible = true
+            keyboardType = KeyboardType.Password,
+            label = "New Password",
+            value = newPassword,
+            onTextChanged = { newPassword = it },
         )
         Box(
             modifier = Modifier
-                .height(12.dp)
+                .height(16.dp)
         )
         Text(
-            text = "Email Address",
-            modifier = Modifier.padding(horizontal = 16.dp),
-            fontSize = 16.sp,
-            lineHeight = 12.sp
-
-        )
-        CustomTextField(
-            keyboardType = KeyboardType.Email,
-            label = "Email",
-            value = email,
-            onTextChanged = { email = it },
-            passwordVisible = true
-        )
-        Box(
-            modifier = Modifier
-                .height(12.dp)
-        )
-        Text(
-            text = "Password",
+            text = "Confirm Password",
             modifier = Modifier.padding(horizontal = 16.dp),
             fontSize = 16.sp,
             lineHeight = 12.sp
         )
         CustomTextField(
             keyboardType = KeyboardType.Password,
-            label = "Password",
+            label = "Confirm Password",
             value = password,
             onTextChanged = { password = it },
         )
         Box(
             modifier = Modifier
-                .height(16.dp)
+                .height(24.dp)
         )
         FilledButtonCustom(
             onClick = {
-                keyboardController?.hide()
-
+                navController.navigate(Login.route)
             },
-            text = "Sign Up",
+            text = "Create Password",
         )
         Box(
             modifier = Modifier
                 .height(16.dp)
         )
-        Row(
-            horizontalArrangement = Arrangement.Center,
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 16.dp)
-        ) {
-
-            Box(
-                modifier = Modifier
-                    .height(1.dp)
-                    .width(100.dp)
-                    .background(Color(0xFFE0E0E0))
-                    .weight(1f)
-            )
-            Text(
-                text = "OR",
-                fontSize = 16.sp,
-                fontWeight = FontWeight.W400,
-                modifier = Modifier.padding(horizontal = 4.dp)
-            )
-            Box(
-                modifier = Modifier
-                    .height(1.dp)
-                    .width(100.dp)
-                    .background(Color(0xFFE0E0E0))
-                    .weight(1f)
-            )
-        }
-        Box(
-            modifier = Modifier
-                .height(8.dp)
-        )
-        CardSocialMedia(
-            text = "Continue with Google",
-            onClick = {},
-            icon = R.drawable.google
-        )
-        CardSocialMedia(
-            text = "Continue with Facebook",
-            onClick = {},
-            icon = R.drawable.facebook
-        )
-        Box(
-            modifier = Modifier
-                .height(16.dp)
-        )
-
-        Row(
-            horizontalArrangement = Arrangement.Center,
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 16.dp)
-        ) {
-            Text(
-                text = "Already have an account?",
-                fontSize = 16.sp,
-                lineHeight = 12.sp
-            )
-            TextButton(
-                onClick = {
-                    navController.popBackStack()
-                },
-                shape = RoundedCornerShape(8.dp),
-
-                ) {
-                Text(
-                    text = "Log In",
-                    fontSize = 16.sp,
-                    fontWeight = FontWeight.W500,
-                    textDecoration = TextDecoration.Underline
-                )
-            }
-        }
 
 
     }
 }
+
 
 @Preview
 @Composable
-fun GreetingPreview() {
+fun PreviewCreatePasswordScreen() {
     ZaladaAndroidTheme {
-        SignUpScreen(navController = rememberNavController())
+        LoginScreen(navController = rememberNavController())
     }
-
 }
-

@@ -61,7 +61,7 @@ fun DetailsProductScreen(
     navController: NavController
 ) {
 
-    var listColors = listOf(
+    val listColors = listOf(
         Color(0xFF2D3C52),
         Color(0xFFA6A5AA),
         Color(0xFFF2E0CC),
