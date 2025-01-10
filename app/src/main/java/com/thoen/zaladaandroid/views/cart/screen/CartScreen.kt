@@ -46,7 +46,7 @@ import com.thoen.zaladaandroid.component.AlertDialogCustom
 import com.thoen.zaladaandroid.component.ButtonBack
 import com.thoen.zaladaandroid.data.ItemCartModel
 import com.thoen.zaladaandroid.views.cart.functions.ItemInCart
-import com.thoen.zaladaandroid.views.home.ListProducts
+import com.thoen.zaladaandroid.views.home.functions.ListProducts
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

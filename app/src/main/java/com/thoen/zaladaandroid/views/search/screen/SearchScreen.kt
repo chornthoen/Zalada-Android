@@ -50,7 +50,7 @@ import androidx.navigation.compose.rememberNavController
 import com.thoen.zaladaandroid.R
 import com.thoen.zaladaandroid.component.ButtonBack
 import com.thoen.zaladaandroid.data.TabSearch
-import com.thoen.zaladaandroid.views.home.ListProducts
+import com.thoen.zaladaandroid.views.home.functions.ListProducts
 
 @Composable
 fun SearchScreen(

@@ -36,7 +36,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.thoen.zaladaandroid.R
-import com.thoen.zaladaandroid.views.home.ListProducts
+import com.thoen.zaladaandroid.views.home.functions.ListProducts
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
